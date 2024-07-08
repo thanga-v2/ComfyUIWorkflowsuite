@@ -1,0 +1,167 @@
+{
+  "last_node_id": 6,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        208,
+        237
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "gettyimages-1431406805-612x612.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "OllamaVision",
+      "pos": [
+        597,
+        271
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "description",
+          "type": "STRING",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OllamaVision"
+      },
+      "widgets_values": [
+        "describe the image, what does it tell ?",
+        "enable",
+        "http://127.0.0.1:11434",
+        "llava:latest",
+        5
+      ]
+    },
+    {
+      "id": 6,
+      "type": "IF_DisplayText",
+      "pos": [
+        1063,
+        325
+      ],
+      "size": [
+        467.47938075520756,
+        401.30168883736917
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 5,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_DisplayText"
+      },
+      "widgets_values": [
+        "",
+        "The image displays a rock painting that appears to depict hunting scenes. There are several figures engaged in various hunting activities: some appear to be archers, while others may represent hunters with bows or spears. The art style is reminiscent of cave paintings, which suggests that this could be from the Paleolithic period or a similar era.\n\nThe painting is rich with detail and color, typical of cave art, and it covers the entire surface of the rock wall. The figures are depicted in a way that indicates movement, possibly suggesting the dynamic nature of hunting activities.\n\nThe environment around the hunters includes what looks like a river or stream, indicating a natural setting for this activity. The painting is monochromatic, with red and black being the dominant colors, which could be due to the specific pigments used by the artists at the time, or it might have been enhanced or restored to its current state.\n\nThe image does not provide any text or additional context that would allow for a precise interpretation of the scene's cultural, historical, or geographical significance, but it offers a glimpse into the prehistoric art forms and the subjects they portrayed."
+      ]
+    }
+  ],
+  "links": [
+    [
+      3,
+      2,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      4,
+      0,
+      6,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9229599817706413,
+      "offset": {
+        "0": -165.345458984375,
+        "1": 32.24082565307617
+      }
+    },
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-07-08T11:59:30.169Z",
+      "modified": "2024-07-08T12:08:10.661Z",
+      "software": "ComfyUI"
+    }
+  },
+  "version": 0.4
+}
