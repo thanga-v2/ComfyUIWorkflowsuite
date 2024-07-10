@@ -1,0 +1,365 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 7,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "VAEDecode",
+      "pos": [
+        1477.5296923288436,
+        729.6326440835536
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 4,
+          "name": "samples",
+          "type": "LATENT",
+          "label": "samples"
+        },
+        {
+          "link": 6,
+          "name": "vae",
+          "type": "VAE",
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "label": "IMAGE",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 6,
+      "type": "PreviewImage",
+      "pos": [
+        1965,
+        794
+      ],
+      "size": {
+        "0": 344.23028564453125,
+        "1": 456.8429260253906
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 5,
+          "name": "images",
+          "type": "IMAGE",
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 2,
+      "type": "DownloadAndLoadKolorsModel",
+      "pos": [
+        576,
+        745
+      ],
+      "size": {
+        "0": 380.762939453125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "kolors_model",
+          "type": "KOLORSMODEL",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadKolorsModel"
+      },
+      "widgets_values": [
+        "Kwai-Kolors/Kolors",
+        "fp16"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "DownloadAndLoadChatGLM3",
+      "pos": [
+        617,
+        1216
+      ],
+      "size": {
+        "0": 395.5247802734375,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadChatGLM3"
+      },
+      "widgets_values": [
+        "fp16"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "KolorsSampler",
+      "pos": [
+        1070,
+        711
+      ],
+      "size": {
+        "0": 373.7910461425781,
+        "1": 285.24786376953125
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 1,
+          "name": "kolors_model",
+          "type": "KOLORSMODEL"
+        },
+        {
+          "link": 3,
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS"
+        },
+        {
+          "link": null,
+          "name": "latent",
+          "type": "LATENT"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsSampler"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1001706324993330,
+        "randomize",
+        30,
+        5,
+        "EulerAncestralDiscreteScheduler",
+        1
+      ]
+    },
+    {
+      "id": 7,
+      "type": "VAELoader",
+      "pos": [
+        1477.9439573323984,
+        849.5901909252642
+      ],
+      "size": {
+        "0": 421.4205627441406,
+        "1": 86.31625366210938
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "label": "VAE",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "KolorsTextEncode",
+      "pos": [
+        556,
+        934
+      ],
+      "size": {
+        "0": 486.15679931640625,
+        "1": 194.9547119140625
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 2,
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsTextEncode"
+      },
+      "widgets_values": [
+        "a lizard, blue colour, holding a big gun, hanging on the corner of the wall, ready to fire, evil laugh",
+        "",
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "KOLORSMODEL"
+    ],
+    [
+      2,
+      3,
+      0,
+      4,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      3,
+      4,
+      0,
+      1,
+      1,
+      "KOLORS_EMBEDS"
+    ],
+    [
+      4,
+      1,
+      0,
+      5,
+      0,
+      "LATENT"
+    ],
+    [
+      5,
+      5,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      7,
+      0,
+      5,
+      1,
+      "VAE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Text Encoder",
+      "bounding": [
+        91,
+        325,
+        437,
+        421
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "VAE",
+      "bounding": [
+        1465,
+        650,
+        486,
+        314
+      ],
+      "color": "#b58b2a",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8390545288824027,
+      "offset": [
+        -277.9723134073209,
+        -287.7812925237375
+      ]
+    },
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-07-10T10:50:08.675Z",
+      "modified": "2024-07-10T12:27:16.727Z",
+      "software": "ComfyUI"
+    }
+  },
+  "version": 0.4
+}
