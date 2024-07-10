@@ -1,0 +1,565 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 16,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "VAELoader",
+      "pos": [
+        -620,
+        859
+      ],
+      "size": {
+        "0": 457.1606750488281,
+        "1": 62.89554214477539
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12,
+            14
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "VAEEncode",
+      "pos": [
+        61.19241213718078,
+        950.2911398947712
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 16,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      }
+    },
+    {
+      "id": 3,
+      "type": "IF_DisplayText",
+      "pos": [
+        1035,
+        276
+      ],
+      "size": {
+        "0": 479.80078125,
+        "1": 251.18359375
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_DisplayText"
+      },
+      "widgets_values": [
+        "",
+        "The image depicts a moment from a soccer match. A player, wearing a blue and white striped uniform with the number 10 on the back, is in action, kicking the ball towards the goal. The player is mid-motion with their body angled away from the camera, suggesting they have just struck the ball. They are wearing blue soccer shoes with white studs and are looking ahead, focusing on the trajectory of the ball.\n\nThe background shows a packed stadium with spectators in the stands, indicating that this is a significant match, possibly an international or national competition given the context. The field is well-maintained with clear demarcation lines. There are advertisements visible around the perimeter of the pitch, including one for McDonald's on the right side of the image.\n\nThe overall atmosphere of the photo conveys a sense of dynamism and competition typical of soccer matches. The lighting suggests that the game is taking place in the evening under artificial stadium lights. There are no visible texts providing additional context or information about the match, teams, players, or event."
+      ]
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "pos": [
+        582,
+        850
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 15
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "pos": [
+        1278,
+        713
+      ],
+      "size": {
+        "0": 388.9400329589844,
+        "1": 356.3939208984375
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 1,
+      "type": "OllamaVision",
+      "pos": [
+        486,
+        276
+      ],
+      "size": {
+        "0": 454.2563781738281,
+        "1": 342.61669921875
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "description",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OllamaVision"
+      },
+      "widgets_values": [
+        "describe the image",
+        "enable",
+        "http://127.0.0.1:11434",
+        "llava:latest",
+        971529970079685,
+        "randomize",
+        "0"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "DownloadAndLoadKolorsModel",
+      "pos": [
+        -456,
+        1177
+      ],
+      "size": {
+        "0": 524.97705078125,
+        "1": 150.11599731445312
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "kolors_model",
+          "type": "KOLORSMODEL",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadKolorsModel"
+      },
+      "widgets_values": [
+        "Kwai-Kolors/Kolors",
+        "fp16"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "KolorsSampler",
+      "pos": [
+        1024,
+        1178
+      ],
+      "size": {
+        "0": 512.5322265625,
+        "1": 466.39361572265625
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "kolors_model",
+          "type": "KOLORSMODEL",
+          "link": 3
+        },
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "link": 4,
+          "slot_index": 1
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsSampler"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1020318342988421,
+        "randomize",
+        25,
+        5,
+        "EulerDiscreteScheduler",
+        1
+      ]
+    },
+    {
+      "id": 8,
+      "type": "DownloadAndLoadChatGLM3",
+      "pos": [
+        -256,
+        1419
+      ],
+      "size": {
+        "0": 410.4847717285156,
+        "1": 115.5916748046875
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "links": [
+            6
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadChatGLM3"
+      },
+      "widgets_values": [
+        "fp16"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        -4,
+        276
+      ],
+      "size": {
+        "0": 421.7668762207031,
+        "1": 476.7235107421875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            16
+          ],
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "wp2961956.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "KolorsTextEncode",
+      "pos": [
+        339,
+        1193
+      ],
+      "size": {
+        "0": 545.7850952148438,
+        "1": 372.3331298828125
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "prompt"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "links": [
+            4
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsTextEncode"
+      },
+      "widgets_values": [
+        "",
+        "Nude, Malformed, NSFW",
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      4,
+      0,
+      5,
+      0,
+      "KOLORSMODEL"
+    ],
+    [
+      4,
+      6,
+      0,
+      5,
+      1,
+      "KOLORS_EMBEDS"
+    ],
+    [
+      6,
+      8,
+      0,
+      6,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      8,
+      3,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      11,
+      13,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      11,
+      0,
+      15,
+      1,
+      "VAE"
+    ],
+    [
+      13,
+      15,
+      0,
+      5,
+      2,
+      "LATENT"
+    ],
+    [
+      14,
+      11,
+      0,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      15,
+      5,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      16,
+      2,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650712,
+      "offset": [
+        765.2407979538417,
+        -170.01294646990934
+      ]
+    },
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-07-10T06:58:39.378Z",
+      "modified": "2024-07-10T09:51:20.887Z",
+      "software": "ComfyUI"
+    }
+  },
+  "version": 0.4
+}
